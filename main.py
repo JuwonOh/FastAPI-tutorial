@@ -8,6 +8,7 @@ app = FastAPI()
 class Item(BaseModel):
     name: str
     price: float
+    description: Union[str, None] = None
     is_offer: Union[bool, None] = None
 
 
@@ -24,3 +25,12 @@ def read_item(item_id: int, q: Union[str, None] = None):
 @app.put("/items/{item_id}")
 def update_item(item_id: int, item: Item):
     return {"item_name": item.name, "item_id": item_id}
+
+
+@app.post("/items/")
+async def create_item(item_id: int, item: Item, q : Union[str, None] = None):
+    item_dict = item.dict()
+    if item.tax:
+        price_with_tax = item.price + item.tax
+        item_dict.update({"price_with_tax": price_with_tax})
+    return item_dict
