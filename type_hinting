@@ -1,0 +1,35 @@
+# https://www.notion.so/4f0c8b60eaf54e8c9dfdd5db4bd09c55
+# https://fastapi.tiangolo.com/python-types/
+
+from typing import Dict
+from typing import Set, Tuple
+from pydantic import BaseModel
+from typing import Optional
+
+
+class User(BaseModel):
+    id: int
+    name = "John Doe"
+    signup_ts: Optional[datetime] = None
+    friends: List[int] = []
+
+
+external_data = {
+    "id": "123",
+    "signup_ts": "2017-06-01 12:22",
+    "friends": [1, "2", b"3"]
+}
+
+user = User(**external_data)
+
+
+def process_items(items_t: Tuple[int, int, str], items_s: Set[bytes]):
+    # items_t는 int, int, str로 이루어진 튜블
+    # items_s는 byte로 이루어진 튜플
+    return items_t, items_s
+
+
+def process_items_dict(prices: Dict[str, float]):
+    for item_name, item_price in prices.items():
+        print(item_name)
+        print(item_price)
