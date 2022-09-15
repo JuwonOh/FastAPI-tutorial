@@ -5,7 +5,7 @@ import time
 
 def find_users_sync(n):
     for i in range(1, n + 1):
-        print("{}명 중 {}먕 사용자 조회중".format(n, i))
+        print("{}명 중 {}명 사용자 조회중".format(n, i))
         time.sleep(1)
     print("총 {}명 사용자 비동기 조회 완료!".format(n))
 
